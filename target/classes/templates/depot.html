@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="head :: tetelien">
+
+
+</head>
+<body>
+
+<!--Header-part-->
+
+
+
+<div id="user-nav" th:replace="header">
+
+</div>
+
+
+
+<!--sidebar-menu-->
+<div th:replace="menu"></div>
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Tableau de bord</a> <a href="#" class="current">Depots</a> </div>
+    <h1>Gestion des Entrees </h1>
+  </div>
+  <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span8">
+        
+      
+        
+
+        
+
+        
+       
+        
+        
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5 > tableau des depots </h5>
+           
+           
+          
+            
+            
+            
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>Date du Depot </th>
+                  <th>quantite</th>
+                  <th>Produit</th>
+                  <th>Prix Actuel</th>
+                  <th>Stock Actuel</th>
+                 
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="depot:${listedepots}">
+                  <td th:text="${depot.date}"> </td>
+                   <td th:text="${depot.qte}"></td>
+                  <td th:text="${depot.produit.nom}"> </td>
+                  <td th:text="${depot.produit.prix}"> </td>
+                  <td th:text="${depot.produit.stock}"> </td>
+                 
+                  <td> 
+                  
+                  
+                  
+          
+          
+          
+          </td>
+               
+                 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="span4">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+          <h5>Forulaire de reception des produits</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <form th:method="POST" th:action="@{/creerdepot.asp}" th:object="${ravitaillerDto}" class="form-horizontal">
+            <div class="control-group">
+              
+              <span class="help-block">Date de reception </span>
+                <input type="text"  name="date" id="date" data-date-format="dd-mm-yyyy"  class="datepicker span12">
+               
+            </div>
+            <div class="control-group">
+              <label class="control-label">Quantite  :</label>
+             
+                <input type="number" name="qte" id="qte"  class="span12" placeholder="Entrez la quantite que vous avez recu" />
+             
+            </div>
+            
+           <div class="control-group">
+              <label class="control-label">Produit</label>
+              
+                <select class="span12" name="prod_id" id="prod_id" >
+                  <option th:each="produit:${listeproduit}" th:value="${produit.id}"   th:text="${produit.nom}">Choissisez le produit</option>
+                  
+                </select>
+             
+            </div>
+             
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      
+    </div>
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+ 
+            
+             
+            
+<!--Footer-part-->
+<div th:replace="footer"></div>
+</body>
+</html>

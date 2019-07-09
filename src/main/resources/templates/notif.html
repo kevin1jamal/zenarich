@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="head :: tetelien">
+
+
+</head>
+<body>
+
+<!--Header-part-->
+
+
+
+<div id="user-nav" th:replace="header">
+
+</div>
+
+
+
+<!--sidebar-menu-->
+<div th:replace="menu"></div>
+
+<div id="content">
+  
+  <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        
+      
+        
+
+        
+
+        
+       
+        
+        
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5 > tableau des Notifications </h5>
+           
+           
+          
+            
+            
+            
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>Date </th>
+                  <th>Objet</th>
+                  
+                 
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="notification:${listenotification}">
+                  <td th:text="${notification.date}"> </td>
+                   <td th:text="${notification.objet}"></td>
+                  
+                 
+                  <td> 
+                  
+                  
+                  
+          
+          
+          
+          </td>
+               
+                 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+ 
+            
+             
+            
+<!--Footer-part-->
+<div th:replace="footer"></div>
+</body>
+</html>

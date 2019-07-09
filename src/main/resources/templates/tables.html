@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="head :: tetelien">
+
+
+</head>
+<body>
+
+<!--Header-part-->
+
+
+
+<div id="user-nav" th:replace="header">
+
+</div>
+
+
+
+<!--sidebar-menu-->
+<div th:replace="menu"></div>
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Accueil</a> <a href="#" class="current">Produits</a> </div>
+    <h1>Gestion des Produits</h1>
+  </div>
+  <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        
+      
+        
+
+        
+
+        
+       
+        
+        
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5> <a href="#myAlert" data-toggle="modal" class="btn btn-success icon-add "> Nouveau Produit</a> </h5>
+           
+           
+           <div id="myAlert" class="modal hide">
+              <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">x</button>
+                <h3>Nouveau Produit</h3>
+              </div>
+              <div class="modal-body">
+                 <div class="span12">
+     
+        
+        <div class="widget-content nopadding">
+          <form th:method="POST" th:action="@{/creerproduit}" th:object="${produitDto}" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label">Nom :</label>
+              <div class="controls">
+                <input type="text" class="span11" placeholder="Nom du produit"  id="nom"  name="nom" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Prix d achat :</label>
+              <div class="controls">
+                <input type="number" class="span11" placeholder="Prix du produit"  id="prix" name="prix"/>
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <label class="control-label">Pv du produit :</label>
+              <div class="controls">
+                <input type="number" class="span11" placeholder="pv du produit"  id="pv" name="pv"/>
+              </div>
+            </div>
+           
+            <div class="control-group">
+              <label class="control-label">descriptif</label>
+              <div class="controls">
+                <textarea class="span11" id="desc" name="desc" ></textarea>
+              </div>
+            </div>
+             
+            
+            
+         
+        </div>
+     
+      
+     
+    </div>
+   
+
+
+              </div>
+              <div class="modal-footer"> <input type="submit" class="btn btn-primary"> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+            </form>
+            </div>
+            
+            
+            
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Pv</th>
+                  <th>Prix</th>
+                  <th>Stock</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="gradeX" th:each="produitDto:${listeproduitDto}">
+                  <td th:text="${produitDto.nom}"> </td>
+                   <td th:text="${produitDto.pv}"></td>
+                  <td th:text="${produitDto.prix}"> </td>
+                  <td th:text="${produitDto.stock}"> </td>
+                  <td class="align-text"> 
+                  
+                  
+                  
+                  
+          
+          
+          
+          </td>
+               
+                 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- debut modal ajout depot -->
+           
+           <div  th:id="myAlertrav" class="modal hide">
+              <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">x</button>
+                <h3>Nouveau Produit</h3>
+              </div>
+              <div class="modal-body">
+                 <div class="span4">
+     
+        
+       
+          <form th:method="POST" th:action="@{/creation}" th:object="${ravitaillerDto}" class="form-horizontal">
+            
+            
+            
+             <div class="control-group">
+              <label class="control-label">Date de reception </label>
+              <div class="controls">
+                <div  data-date="12-02-2017" class="input-append date datepicker">
+                  <input type="text" value="12-02-2012"  data-date-format="dd-mm-yyyy" data-title="dans ce champs il faudra mettre la date de reception de votre stock" name="date" id="date">
+                  <span class="add-on"><i class="icon-th"></i></span> </div>
+              </div>
+            </div>
+             
+            
+             <div class="control-group">
+              <label class="control-label">Quatite recue </label>
+              <div class="controls">
+                <input type="number" placeholder="Entrez la quantite" data-title="dans ce champs il faudra mettre le nombre de produit que vous ajoutez dans le stock" class="tip" data-original-title="" name="qte" id="qte">
+              </div>
+            </div>
+            
+            <div class="control-group">
+             
+              <div class="controls">
+                <input type="number" placeholder="Entrez la quantite" th:value="1"  class="tip" data-original-title="" name="prod_id" id="prod_id">
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <label class="control-label">Quatite recue </label>
+              <div class="controls">
+                <input type="text" placeholder="Entrez la quantite" data-title="dans ce champs il faudra mettre le nombre de produit que vous ajoutez dans le stock" class="tip" data-original-title="" name="produit" id="produit">
+              </div>
+            </div>
+            
+           
+            
+         
+       
+     
+      
+     
+    </div>
+   
+
+
+              </div>
+              <div class="modal-footer"> <input type="submit" class="btn btn-primary"> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+           </form>
+            </div>
+           
+            <!-- fin modal ajout depot -->
+            
+<!--Footer-part-->
+<div th:replace="footer"></div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="head :: tetelien">
+
+
+</head>
+<body>
+
+<!--Header-part-->
+
+
+
+<div id="user-nav" th:replace="header">
+
+</div>
+
+
+
+<!--sidebar-menu-->
+<div th:replace="menu"></div>
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Tableau de bord</a> <a href="#" class="current">Ventes</a> </div>
+    <h1>Tableau des Ventes </h1>
+    <div class="container-fluid">
+           <div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_lb span3"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important" th:text="${qte_prod}">20</span> Nombre de produits vendus</a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i>  <span class="label label-important" th:text="${montant_vendu}"></span>Montant vendu</a> </li>
+        <li class="bg_ly span3"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success" th:text="${somme}">101</span> Pv gagne </a> </li>
+        <li class="bg_lo span3"> <a href="tables.html"> <i class="icon-th"></i><span class="label label-success" th:text="${nbre_vente}">101</span> Nombre de Ventes</a> </li>
+        <li class="bg_ls span3"> <a href="grid.html"> <i class="icon-fullscreen"></i><span class="label label-success" th:text="${nbre_pers}">101</span>Nombre de Clients</a> </li>
+        
+
+      </ul>
+    </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span8">
+        
+      
+        
+
+        
+
+        
+       
+        
+        
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5 th:text="${somme}"> </h5>
+           
+           
+          
+            
+            
+            
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>Date  </th>
+                  <th>Produit</th>
+                  <th>Qte Vendue</th>
+                  <th>Montant Vendu</th>
+                  <th>PV Gagnés</th>
+                  <th>Prix unitaire</th>
+                  <th>Stock restant</th>
+                       <th>Client</th>
+                 
+                  <th>Sup</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="vente:${listeventes}">
+                  <td th:text="${vente.date}"> </td>
+                   <td th:text="${vente.produit.nom}"> </td>
+                   <td th:text="${vente.qte}"></td>
+                  <td th:text="${vente.total_montant}"> </td>
+                  <td th:text="${vente.total_pv}"> </td>
+                  <td th:text="${vente.produit.prix}"> </td>
+                   <td th:text="${vente.produit.stock}"> </td>
+                    <td> </td>
+                 
+                  <td class="align-text"> 
+                  <a th:href="@{/supv/{id}(id=${vente.id})}" class="btn btn-danger fa fa-trash"></a>
+                  
+                  
+                  
+          
+          
+          
+          </td>
+               
+                 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="span4">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+          <h5>Forulaire de reception des produits</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <form th:method="POST" th:action="@{/creervente.asp}" th:object="${venteDto}" class="form-horizontal">
+            
+              
+           <div class="control-group">
+              <label class="control-label">Client</label>
+              
+                <select class="span12" name="ach_email" id="ach_email" >
+                  <option th:each="user:${listesusers}" th:value="${user.email}"   th:text="${user.name}+' '+${user.lastName}+' '+${user.telephone}">Choissisez le client</option>
+                  
+                </select>
+             
+            </div>
+            
+            
+            <div class="control-group">
+              
+              <span class="help-block">Date de la vente </span>
+                <input type="text"  name="date" id="date" data-date-format="dd-mm-yyyy"  class="datepicker span12">
+               
+            </div>
+            <div class="control-group">
+              <label class="control-label">Quantite vendue :</label>
+             
+                <input type="number" name="qte" id="qte"  class="span12" placeholder="Entrez la quantite que vous avez recu" />
+             
+            </div>
+            
+           <div class="control-group">
+              <label class="control-label">Produit vendu</label>
+              
+                <select class="span12" name="prod_id" id="prod_id" >
+                  <option th:each="produit:${listeproduit}" th:value="${produit.id}"   th:text="${produit.nom}">Choissisez le produit</option>
+                  
+                </select>
+             
+            </div>
+             
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      
+    </div>
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+ 
+            
+             
+            
+<!--Footer-part-->
+<div th:replace="footer"></div>
+</body>
+</html>
